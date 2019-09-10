@@ -1,20 +1,13 @@
-class SessionsController < ApplicationController
+class SecretsController < ApplicationController
+  before_action :require_login
 
-def new
-end
-
-def create
-  if params[:name].nil? || params[:name] == ""
-    redirect_to '/login'
+  def show
   end
-  session[:name] = params[:name]
-end
 
-def destroy
-  if session[:name].nil?
-  else
-    session.delete :name
+  private
+
+  def require_login
+    redirect_to '/login' unless session.include? :name
   end
-end
 
 end
